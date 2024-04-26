@@ -1,106 +1,75 @@
-# from django.shortcuts import render
-# from django.contrib.auth.decorators import login_required
-# from django.contrib.auth.forms import  UserCreationForm
-# from django.http import HttpResponse
-
-# # @login_required 
-# # def home(request):
-# #     return render(request, "home.html",{})
-
-# # def authView(request):
-# #     form = UserCreationForm(request.POST or None)
-# #     if request.method == "POST":
-# #         if form.is_valid():
-# #             form.save()
-# #         else:    
-# #             form = UserCreationForm()
-# #     return render(request , "registration/signup.html",{"form":form})
-
-# def index(request):
-#     return HttpResponse("<h1>App is running</1>")
-
-# def add_person(request):
-#     records = {
-#         "firstname" : "nabil",
-#         "lastname" : "kouki",
-#     }
-#     con.insert_one(records)
-#     return HttpResponse("added succesfully")
-
-# def get_all_person(request):
-#     persons = con.find()
-#     return HttpResponse(persons)
-
-from rest_framework.views import APIView
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework import status
+from .models import CustomUser
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
+from django.contrib.auth import authenticate
 from .serializers import UserSerializer
-from .models import con
-from .models import User
-from rest_framework.exceptions import AuthenticationFailed
-import jwt , datetime
+from rest_framework_simplejwt.tokens import RefreshToken
+# Create your views here.
+
+from django.contrib.auth import authenticate
+
+@api_view(['POST'])
+def login(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    if email is None or password is None:
+        return Response({'error': 'Please provide both email and password'},
+                        status=status.HTTP_400_BAD_REQUEST)
+
+    user = authenticate(request, email=email, password=password)
+
+    if not user:
+        return Response({'error': 'Invalid Credentials'},
+                        status=status.HTTP_404_NOT_FOUND)
+
+    token, created = Token.objects.get_or_create(user=user)
+    serializer = UserSerializer(user)
+
+    return Response({'token': token.key, 'user': serializer.data})
 
 
 
-class RegisterView(APIView):
-    def post(self,request):
-            serializer = UserSerializer(data = request.data)
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-            con.insert_one(serializer.data)
-            return Response(serializer.data)
 
-class LoginView(APIView):
-    def post(self,request):
-         email = request.data['email']
-         password = request.data['password']
-         user = con.find_one({'email':email},{'password':password})
-         if not user:
-              return Response({"error":"User does not exist"},status=404)
-         
-         return Response({
-              "message":"Success"
-         })
 
-# class LoginView(APIView):
-#     def post(self,request):
-#          email = request.data['email']
-#          password = request.data['password']
-         
-#          user = con.find_one({'email':email},{'password':password})
-#          if not user:
-#               return Response({"error":"User does not exist"},status=404)
-#          payload = {
-#               'name':user.name,
-#               'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
-#               'int': datetime.datetime.utcnow()
-#          }
-#          token = jwt.encode(payload , 'secret' , algorithm='HS256').decode('utf-8')
-#           response = Response()
-#           response.set_cookie(key="jwt' , value=token , httponly=True)
-#          response.data={
-#               "jwt":token
-#          }
-#           return  response
-class UserView(APIView):
-    def get(self , request):
-        token = request.COOKIES.get('jwt')
-        if not token:
-            raise AuthenticationFailed("Unauthentificated!!")
-        try:
-             payload = jwt.decode(token , 'secret' , algorithm =['HS256'])
-        except jwt.ExpiredSignatureError:
-             raise AuthenticationFailed("Unauthentificated") 
-        user = User.objects.get(id=payload['id']).first()
-        # user = con.find_one({'id':payload['id']})
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
-    
+@api_view(['POST'])
+def signup(request):
+    serializer = UserSerializer(data = request.data)
+    if serializer.is_valid():
+        serializer.save()
+        user = CustomUser.objects.get(username = request.data['username'])
+        user.set_password(request.data['password'])
+        user.save()
+        token = Token.objects.create(user=user)
+        return Response({"token":token.key,"user":serializer.data})
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class LogoutView(APIView):
-     def post(self,request):
-          response = Response()   
-          response.delete_cookie('jwt')
-          response.data = {
-               'message' : 'success'
-          }
-          return response
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def test_token(request):
+    return Response("Accepted {}".format(request.user.email))
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def logout(request):
+    try:
+        # Retrieve the refresh token from the request data
+        refresh_token = request.data.get('refresh')
+        
+        if not refresh_token:
+            return Response({"error": "Refresh token is required."}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Blacklist the refresh token to invalidate it
+        RefreshToken(refresh_token).blacklist()
+        
+        return Response({"success": "Successfully logged out."}, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)

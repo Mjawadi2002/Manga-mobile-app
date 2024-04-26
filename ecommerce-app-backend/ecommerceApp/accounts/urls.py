@@ -1,15 +1,13 @@
-from django.urls import path,include
-#from .views import authView,home
-from .views import RegisterView,LoginView,UserView
+from django import views
+from django.urls import path,include, re_path
+from django.urls import re_path
+
 from . import views
-# urlpatterns = [
-#     path ("",home , name="home"),
-#     path ("signup/",authView , name="authView"),
-#     path("accounts/", include("django.contrib.auth.urls")),
-# ]
+
+
 urlpatterns = [
-    path('register',RegisterView.as_view()),# register view
-    path('login',LoginView.as_view()),
-    path('user',UserView.as_view()) 
-    
+    path('signup', views.signup),
+    path('login', views.login),
+    path('test_token', views.test_token),
+    path('logout' , views.logout),
 ]

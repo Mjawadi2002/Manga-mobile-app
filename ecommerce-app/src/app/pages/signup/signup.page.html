@@ -1,30 +1,27 @@
+
 <div class="container py-5 custom-card h-60">
   <div class="row">
     <div class="col md-5">
       <h1 class="display-3 text-black text-center" style="font-family:'Qasengi Trial', sans-serif;">Sign Up</h1>
-      <form>
+      <form (ngSubmit)="signUp()">
         <div class="mb-3">
-          
-          <input type="text" class="form-control " id="exampleInputUsername" aria-describedby="emailHelp" placeholder="name" style="background: transparent;">
-        </div>
-        <div class="mb-3">
-
-          <input type="email" class="form-control" id="exampleInputNumber1" placeholder="phone number" style="background: transparent;">
-        </div>
-        <div class="mb-3">
-
-          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" style="background: transparent;">
+          <input type="text" class="form-control" id="exampleInputUsername" aria-describedby="emailHelp" placeholder="username" style="background: transparent;" [(ngModel)]="user.username" name="username">
         </div>
         
         <div class="mb-3">
-    
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" style="background: transparent;">
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" style="background: transparent;" [(ngModel)]="user.email" name="email">
         </div>
-        <button type="submit" class="btn btn-outline-primary text-center w-100" routerLink="/login">Sign Up</button>
+        <div class="mb-3">
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" style="background: transparent;" [(ngModel)]="user.password" name="password">
+        </div>
+        <div class="mb-3">
+          <input type="tel" class="form-control" id="exampleInputNumber1" placeholder="phone number" style="background: transparent;" [(ngModel)]="user.phoneNumber" name="phoneNumber">
+        </div>
+        <button type="submit" class="btn btn-outline-primary text-center w-100">Sign Up</button>
         <br>
         <label for="exampleInputEmail1" class="form-label">Already have an account ?</label>
         <br>
-        <button type="submit" class="btn btn-outline-primary text-center w-100" routerLink="/login">Log in</button>
+        <button type="button" class="btn btn-outline-primary text-center w-100" routerLink="/login">Log in</button>
       </form>
     </div>
   </div>

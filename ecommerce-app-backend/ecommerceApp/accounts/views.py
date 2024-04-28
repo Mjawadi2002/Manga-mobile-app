@@ -40,15 +40,33 @@ def login(request):
 
 @api_view(['POST'])
 def signup(request):
-    serializer = UserSerializer(data = request.data)
+    serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-        user = CustomUser.objects.get(username = request.data['username'])
+        user = CustomUser.objects.get(username=request.data['username'])
         user.set_password(request.data['password'])
         user.save()
+        
+        # Generate a refresh token for the user
         token = Token.objects.create(user=user)
-        return Response({"token":token.key,"user":serializer.data})
+        
+        return Response({"token": token.key, "user": serializer.data})
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def token_refresh(request):
+    refresh_token = request.data.get('refresh_token')
+    if not refresh_token:
+        return Response({"error": "Refresh token is required."}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        # Attempt to validate the refresh token
+        token = RefreshToken(refresh_token)
+        access_token = str(token.access_token)
+        return Response({"access_token": access_token}, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
@@ -58,18 +76,27 @@ def test_token(request):
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def logout(request):
     try:
-        # Retrieve the refresh token from the request data
-        refresh_token = request.data.get('refresh')
         
-        if not refresh_token:
-            return Response({"error": "Refresh token is required."}, status=status.HTTP_400_BAD_REQUEST)
+        if 'Authorization' in request.headers:
+            
+            token = request.headers['Authorization'].split()[1]
+            
 
-        # Blacklist the refresh token to invalidate it
-        RefreshToken(refresh_token).blacklist()
-        
-        return Response({"success": "Successfully logged out."}, status=status.HTTP_200_OK)
+            return Response({"success": "Successfully logged out."}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "Authorization header not found."}, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
-        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])  # Ensure user is authenticated
+def get(request):
+    user = request.user
+    serializer = UserSerializer(user)
+    return Response(serializer.data, status=status.HTTP_200_OK)

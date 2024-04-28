@@ -37,5 +37,6 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    this.shared.logout();
   }
 }

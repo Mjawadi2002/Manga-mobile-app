@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage-angular';
 import { catchError, switchMap, tap } from 'rxjs/operators';
-import { Observable, from, throwError } from 'rxjs';
+import { Observable, forkJoin, from, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,11 @@ export class SharedService {
 
   private apiUrl = 'http://127.0.0.1:8000/';
   private tokenKey = 'token';
-  
+
   constructor(
     private http: HttpClient,
     private storage: Storage
-  ) { 
+  ) {
     this.initStorage();
   }
 
@@ -27,11 +27,11 @@ export class SharedService {
     await this.initStorage(); // Ensure storage is initialized
     return await this.storage.get(this.tokenKey);
   }
+
   signUp(userData: any): Observable<any> {
     return this.http.post('http://127.0.0.1:8000/accounts/signup', userData);
   }
 
-  
   login(email: string, password: string): Observable<any> {
     const body = { email, password };
     return this.http.post<any>('http://127.0.0.1:8000/accounts/login', body).pipe(
@@ -43,9 +43,9 @@ export class SharedService {
       catchError(this.handleError)
     );
   }
-  
-  isLoggedIn(): Promise<boolean> {
-    return this.getToken().then(token => !!token);
+
+  async isLoggedIn(): Promise<boolean> {
+    return await this.getToken().then(token => !!token);
   }
 
   private handleError(error: HttpErrorResponse): Observable<any> {
@@ -64,27 +64,35 @@ export class SharedService {
   }
 
   logout(): Observable<any> {
-    return from(this.getToken()).pipe(
-      switchMap(token => {
-        if (!token) {
-          return throwError('Token not found');
-        }
-        
-        console.log('Token before logout:', token);
-  
-        const headers = new HttpHeaders({
-          'Authorization': `Bearer ${token}`
-        });
-  
-        return this.http.post<any>('http://127.0.0.1:8000/accounts/logout', {}, { headers }).pipe(
-          switchMap(() => {
-            // Remove the token from storage upon successful logout
-            return from(this.storage.remove(this.tokenKey));
-          }),
-          catchError(this.handleError)
-        );
-      })
-    );
+    return new Observable(observer => {
+      // Remove token from local storage
+      this.storage.remove(this.tokenKey).then(() => {
+        // Notify observers that logout was successful
+        observer.next();
+        observer.complete();
+      }).catch(error => {
+        observer.error(error); // Notify observers if an error occurs
+      });
+    });
+  }
+  async showStorageContent() {
+    try {
+      await this.storage.create();
+      const keys = await this.storage.keys();
+      const content: Record<string, any> = {}; // Define type of content
+      for (const key of keys) {
+        const value = await this.storage.get(key);
+        content[key] = value;
+      }
+      console.log('Ionic Storage Content:', content);
+    } catch (error) {
+      console.error('Error retrieving Ionic Storage content:', error);
+    }
   }
   
+
+  getUserProfile() {
+    return this.http.get<any>('http://127.0.0.1:8000/accounts/getprofile');
+  }
+
 }

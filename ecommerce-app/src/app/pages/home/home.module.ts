@@ -22,4 +22,6 @@ import { ArticlesModule } from 'src/app/articles/articles.module';
   ],
   declarations: [HomePage,PromotionsComponent,InfoComponent]
 })
-export class HomePageModule {}
+export class HomePageModule {
+  articles: any[] = new Array(10).fill({});
+}

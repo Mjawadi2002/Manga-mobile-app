@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage-angular';
 import { catchError, switchMap, tap } from 'rxjs/operators';
-import { Observable, forkJoin, from, throwError } from 'rxjs';
+import { Observable, forkJoin, from, observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +19,12 @@ export class SharedService {
     this.initStorage();
   }
 
-  async initStorage() {
+  async initStorage(): Promise<void> {
+    // Initialize Ionic Storage if it hasn't been initialized yet
     await this.storage.create();
   }
 
-  async getToken(): Promise<string | null> {
+  async getToken(): Promise<string> {
     await this.initStorage(); // Ensure storage is initialized
     return await this.storage.get(this.tokenKey);
   }
@@ -75,6 +76,28 @@ export class SharedService {
       });
     });
   }
+
+  getUser(): Observable<any> {
+    return new Observable(observer => {
+      this.storage.get('token').then(token => {
+        if (token) {
+          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+          this.http.get('http://127.0.0.1:8000/accounts/getprofile', { headers }).subscribe(
+            (response) => {
+              observer.next(response); // Emit the response
+              observer.complete(); // Complete the observable
+            },
+            (error) => {
+              observer.error('Error fetching user profile'); // Emit an error
+            }
+          );
+        } else {
+          observer.error('Token not found'); // Emit an error if token is not found
+        }
+      });
+    });
+  }
+
   async showStorageContent() {
     try {
       await this.storage.create();
@@ -91,8 +114,7 @@ export class SharedService {
   }
   
 
-  getUserProfile() {
-    return this.http.get<any>('http://127.0.0.1:8000/accounts/getprofile');
-  }
+ 
+
 
 }

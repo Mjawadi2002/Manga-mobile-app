@@ -98,5 +98,6 @@ def logout(request):
 @permission_classes([IsAuthenticated])  # Ensure user is authenticated
 def get(request):
     user = request.user
+    token = Token.objects.get(user=user)
     serializer = UserSerializer(user)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response({"token": token.key, "user": serializer.data}, status=status.HTTP_200_OK)

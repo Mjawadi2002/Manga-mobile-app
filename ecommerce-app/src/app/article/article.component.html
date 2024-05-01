@@ -1,14 +1,8 @@
-<ion-card class="card  text-white h-100 w-80 custom" >
-  <div>
-  <img alt="Silhouette of mountains" src="../../assets/images/manga2.jpg" />
-  <ion-card-header >
-    <ion-card-title class="text-dark" style="font-size: 15px;">Solo Leveling</ion-card-title>
-    <ion-card-subtitle class="text-dark">Manhawa</ion-card-subtitle>
+<ion-card class="card text-white h-92 w-70 custom">
+  <img [src]="manga.image" alt="Manga Image">
+  <ion-card-header>
+    <ion-card-title class="text-dark" style="font-size: 15px;">{{ manga.name }}</ion-card-title>
   </ion-card-header>
-
-  <ion-card-content class="text-dark">
-    SEASON 1
-  </ion-card-content>
-  <button type="button" class="btn btn-outline-dark  w-100 text-center" >Add to cart</button>
-</div>
+  <ion-card-subtitle class="text-dark text-center" style="font-size: 12px;">Price: {{ manga.price }} dt</ion-card-subtitle>
+  <button type="button" class="btn btn-dark w-100 text-center">Add to cart</button>
 </ion-card>

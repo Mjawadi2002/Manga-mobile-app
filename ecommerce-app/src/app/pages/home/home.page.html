@@ -1,48 +1,15 @@
-  <br>
-  <br>
-  <div class="container" style="height: 100vh ;overflow-y: auto;">
-    <h1 class="display-3 text-center text-dark py-3" style="font-family:'Qasengi Trial', sans-serif;">Check out latest </h1>
-    <div class="container-fluid">
-      <div class="row py-3">
-        <app-promotions></app-promotions>
+<br>
+<br>
+<div class="container" style="height: 100vh; overflow-y: auto;">
+  <h1 class="display-3 text-center text-dark py-3" style="font-family: 'Qasengi Trial', sans-serif;">Check out latest </h1>
+  <div class="container-fluid">
+    <div class="row py-3">
+      <app-promotions></app-promotions>
+    </div>
+    <div class="row">
+      <div class="col py-1" *ngFor="let manga of mangaList">
+        <app-article [manga]="manga"></app-article>
       </div>
-      <div class="row ">
-        <h1 class="display-3 text-center text-dark py-3" style="font-family:'Qasengi Trial', sans-serif;">Anime Mangas </h1>
-        <div class="col md-1 py-2">
-          <app-article></app-article>
-        </div>
-        <div class="col md-1 py-2">
-          <app-article></app-article>
-        </div>
-        <div class="col md-1 py-2">
-          <app-article></app-article>
-        </div>
-        <div class="col md-1 py-2">
-          <app-article></app-article>
-        </div>
-        <div class="col md-1 py-2">
-          <app-article></app-article>
-        </div>
-        <div class="col md-1 py-2">
-          <app-article></app-article>
-        </div>
-        <div class="col md-1 py-2">
-          <app-article></app-article>
-        </div>
-        <div class="col md-1 py-2">
-          <app-article></app-article>
-        </div>
-        <div class="col md-1 py-2">
-          <app-article></app-article>
-        </div>
-        <div class="col md-1 py-2">
-          <app-article></app-article>
-        </div>
-      </div>
-      <app-info></app-info>
-      <br>
-      <br>
-      <br>
     </div>
   </div>
-  
+</div>

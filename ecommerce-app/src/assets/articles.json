@@ -1,0 +1,72 @@
+[
+    {
+        "id":1,
+        "name":"solo leveling",
+        "image":"https://i.pinimg.com/564x/20/b1/1a/20b11aa1187ad281328ff924a4282e72.jpg",
+        "description":"Solo Leveling is a South Korean web novel turned manhwa, following the journey of a weak hunter who becomes immensely powerful after awakening a unique ability.",
+        "price":20
+    },
+    {
+        "id":2,
+        "name":"One piece",
+        "image":"https://i.pinimg.com/originals/1d/73/b4/1d73b47bf0bd1cf52d0f3b57172ac985.gif",
+        "description":"One Piece follows Monkey D. Luffy and his crew's quest for the ultimate treasure in a fantastical world of pirates and adventure.",
+        "price":30
+    },
+    {
+        "id":3,
+        "name":"Naruto",
+        "image":"https://i.pinimg.com/564x/a7/5e/9e/a75e9e35a8ed1ccc1017db40438c60e9.jpg",
+        "description":"Naruto: A young ninja's quest for strength, friendship, and leadership in a world of shinobi.",
+        "price":30
+    },
+    {
+        "id":4,
+        "name":"Bleach",
+        "image":"https://i.pinimg.com/564x/95/49/5f/95495f095230a89a6d384947fc21ee47.jpg",
+        "description":"This is a korean manhawa",
+        "price":20
+    },
+    {
+        "id":5,
+        "name":"One punch man",
+        "image":"https://i.pinimg.com/236x/fb/4e/18/fb4e18917e89e9d49d298c1a88a68732.jpg",
+        "description":"This is a korean manhawa",
+        "price":20
+    },
+    {
+        "id":6,
+        "name":"Classroom of the elite",
+        "image":"https://i.pinimg.com/564x/74/58/87/7458878db78e3509d53847bc1264d714.jpg",
+        "description":"This is a korean manhawa",
+        "price":25
+    },
+    {
+        "id":7,
+        "name":"Doctor Stone",
+        "image":"https://i.pinimg.com/564x/52/91/14/529114b433c2d099b0192f8b7c300673.jpg",
+        "description":"This is a korean manhawa",
+        "price":20
+    },
+    {
+        "id":8,
+        "name":"Your name",
+        "image":"https://i.pinimg.com/564x/e8/7a/ad/e87aad6573691be7e88e8256ae79f209.jpg",
+        "description":"This is a korean manhawa",
+        "price":20
+    },
+    {
+        "id":9,
+        "name":"Death note",
+        "image":"https://i.pinimg.com/564x/d3/6f/87/d36f8772b12e8fa0e7ca17cc84476bf4.jpg",
+        "description":"Death Note: A high school student gains a deadly notebook that grants the power to kill anyone whose name is written in it, sparking a thrilling battle of wits between him and a genius detective.",
+        "price":20
+    },
+    {
+        "id":10,
+        "name":"Dragon ball Z",
+        "image":"https://i.pinimg.com/564x/17/b1/79/17b17900e878dc99bea6e784a1dc9764.jpg",
+        "description":"This is a korean manhawa",
+        "price":30
+    }
+]

@@ -86,13 +86,19 @@ export class SharedService {
             (response) => {
               observer.next(response); // Emit the response
               observer.complete(); // Complete the observable
+              console.log(token);
+              console.log(headers);
+              
+              
             },
             (error) => {
+              console.error('Error fetching user profile:', error); // Log the error
               observer.error('Error fetching user profile'); // Emit an error
             }
           );
         } else {
-          observer.error('Token not found'); // Emit an error if token is not found
+          console.error('Token not found'); // Log the error
+          observer.error('Token not found'); // Emit an error
         }
       });
     });

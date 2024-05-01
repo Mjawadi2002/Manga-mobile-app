@@ -10,6 +10,9 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from .serializers import UserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
+
 # Create your views here.
 
 from django.contrib.auth import authenticate
@@ -94,10 +97,15 @@ def logout(request):
 
 
 
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])  # Ensure user is authenticated
+@login_required
+@api_view(["GET"])
 def get(request):
     user = request.user
-    token = Token.objects.get(user=user)
+    
+    try:
+        token = Token.objects.get(user=user)
+    except Token.DoesNotExist:
+        token = None
+
     serializer = UserSerializer(user)
-    return Response({"token": token.key, "user": serializer.data}, status=status.HTTP_200_OK)
+    return Response({"token": token.key if token else None, "user": serializer.data}, status=status.HTTP_200_OK)

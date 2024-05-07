@@ -32,6 +32,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartPageModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'seller',
+    loadChildren: () => import('./pages/seller/seller.module').then( m => m.SellerPageModule)
+  },
+
 ];
 
 @NgModule({

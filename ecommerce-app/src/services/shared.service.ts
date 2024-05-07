@@ -9,7 +9,7 @@ import { Observable, forkJoin, from, observable, throwError } from 'rxjs';
 })
 export class SharedService {
 
-  private apiUrl = 'http://127.0.0.1:8000/';
+  private apiUrl = 'http://192.168.1.141:8000/';
   private tokenKey = 'token';
 
   constructor(
@@ -30,12 +30,12 @@ export class SharedService {
   }
 
   signUp(userData: any): Observable<any> {
-    return this.http.post('http://127.0.0.1:8000/accounts/signup', userData);
+    return this.http.post('http:// 192.168.1.141:8000/signup', userData);
   }
 
   login(email: string, password: string): Observable<any> {
     const body = { email, password };
-    return this.http.post<any>('http://127.0.0.1:8000/accounts/login', body).pipe(
+    return this.http.post<any>('http://192.168.1.141:8000/login', body).pipe(
       tap((res: any) => {
         if (res.token) {
           this.storage.set(this.tokenKey, res.token).catch(error => console.error('Error storing token:', error));
@@ -79,17 +79,14 @@ export class SharedService {
 
   getUser(): Observable<any> {
     return new Observable(observer => {
-      this.storage.get('token').then(token => {
+      this.getToken().then(token => {
         if (token) {
           const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-          this.http.get('http://127.0.0.1:8000/accounts/getprofile', { headers }).subscribe(
+          console.log('Headers set for request:', headers); // Debug log
+          this.http.get('http://192.168.1.141:8000/getprofile', { headers }).subscribe(
             (response) => {
               observer.next(response); // Emit the response
               observer.complete(); // Complete the observable
-              console.log(token);
-              console.log(headers);
-              
-              
             },
             (error) => {
               console.error('Error fetching user profile:', error); // Log the error
@@ -103,6 +100,9 @@ export class SharedService {
       });
     });
   }
+  
+  
+  
 
   async showStorageContent() {
     try {

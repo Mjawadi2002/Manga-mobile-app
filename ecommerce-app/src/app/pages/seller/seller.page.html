@@ -1,22 +1,22 @@
 <div class="container" style="height: 100vh; overflow-y: auto;">
   <h1 class="display-3 text-center text-dark py-3" style="font-family: 'Qasengi Trial', sans-serif;">
-    Welcome {{ userData.username }}
+    <!-- Welcome {{ userData?.username }} -->
   </h1>
   <ion-card class="card custom text-white h-70" *ngIf="userData">
     <div>
       <img src="../../../assets/images/moh.jpg" alt="">
       <ion-card-header>
         <ion-card-title class="text-dark" style="font-size: 15px;">
-          User Name: {{ userData.username }}
+          <!-- User Name: {{ userData?.username }} -->
         </ion-card-title>
         <ion-card-subtitle class="text-dark">
-          User Email: {{ userData.email }}
+          <!-- User Email: {{ userData?.email }} -->
         </ion-card-subtitle>
       </ion-card-header>
       <div class="text-center">
-        <ion-button fill="outline">Edit Profile <ion-icon name="settings-outline" class="px-2"></ion-icon></ion-button>
-        <ion-button fill="outline">Delete Profile <ion-icon name="trash-outline" class="px-2"></ion-icon></ion-button>
-        <ion-button fill="outline">Add Manga <ion-icon name="add-circle-outline" class="px-2"></ion-icon></ion-button>
+        <ion-button fill="outline" >Add Article <ion-icon name="add-circle-outline" class="px-2"></ion-icon></ion-button>
+        <ion-button fill="outline" >Edit Profile <ion-icon name="settings-outline" class="px-2"></ion-icon></ion-button>
+        <ion-button fill="outline" >Delete Profile <ion-icon name="trash-outline" class="px-2"></ion-icon></ion-button>
       </div>
     </div>
   </ion-card>

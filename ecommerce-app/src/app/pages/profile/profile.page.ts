@@ -14,13 +14,18 @@ export class ProfilePage implements OnInit {
   constructor(private shared: SharedService) {}
 
   ngOnInit() {
+    this.shared.initStorage().then(() => {
+      console.log('Storage initialized');
+    }).catch(error => {
+      console.error('Error initializing storage:', error);
+    });
     // Call a method to fetch user profile data when the component initializes
     this.getUser();
   }
 
   getUser(): void {
     this.shared.getUser().subscribe({
-      next: user => this.user = user,
+      next: user => this.userData = this.userData,
       error: err => this.errorMessage = err
     });
   }

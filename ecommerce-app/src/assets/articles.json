@@ -1,9 +1,9 @@
 [
     {
         "id":1,
-        "name":"solo leveling",
-        "image":"https://i.pinimg.com/564x/20/b1/1a/20b11aa1187ad281328ff924a4282e72.jpg",
-        "description":"Solo Leveling is a South Korean web novel turned manhwa, following the journey of a weak hunter who becomes immensely powerful after awakening a unique ability.",
+        "name":"Dr stone",
+        "image":"https://i.pinimg.com/564x/52/91/14/529114b433c2d099b0192f8b7c300673.jpg",
+        "description":"This is a korean manhawa",
         "price":20
     },
     {
@@ -43,9 +43,9 @@
     },
     {
         "id":7,
-        "name":"Dr Stone",
-        "image":"https://i.pinimg.com/564x/52/91/14/529114b433c2d099b0192f8b7c300673.jpg",
-        "description":"This is a korean manhawa",
+        "name":"Solo Leveling",
+        "image":"https://i.pinimg.com/564x/20/b1/1a/20b11aa1187ad281328ff924a4282e72.jpg",
+        "description":"Solo Leveling is a South Korean web novel turned manhwa, following the journey of a weak hunter who becomes immensely powerful after awakening a unique ability.",
         "price":20
     },
     {
@@ -68,5 +68,117 @@
         "image":"https://i.pinimg.com/564x/17/b1/79/17b17900e878dc99bea6e784a1dc9764.jpg",
         "description":"This is a korean manhawa",
         "price":30
+    },
+    {
+        "id":11,
+        "name":"Attack on Titan",
+        "image":"https://i.pinimg.com/564x/34/24/9a/34249abb91aec41682ad0d06e49cd764.jpg",
+        "description":"Solo Leveling is a South Korean web novel turned manhwa, following the journey of a weak hunter who becomes immensely powerful after awakening a unique ability.",
+        "price":20
+    },
+    {
+        "id":12,
+        "name":"Sword Art Online ",
+        "image":"https://i.pinimg.com/736x/94/d4/f7/94d4f7ae07a43c9af5df76e7ce6dc038.jpg",
+        "description":"One Piece follows Monkey D. Luffy and his crew's quest for the ultimate treasure in a fantastical world of pirates and adventure.",
+        "price":30
+    },
+    {
+        "id":13,
+        "name":"My Hero Academia",
+        "image":"https://i.pinimg.com/564x/d3/48/c3/d348c3e711d8fe006b25391c757a553e.jpg",
+        "description":"Naruto: A young ninja's quest for strength, friendship, and leadership in a world of shinobi.",
+        "price":30
+    },
+    {
+        "id":14,
+        "name":"Cowboy Bebop",
+        "image":"https://i.pinimg.com/474x/75/09/f9/7509f91910250af3cbee00e22ab1e780.jpg",
+        "description":"This is a korean manhawa",
+        "price":20
+    },
+    {
+        "id":15,
+        "name":"Neon Genesis",
+        "image":"https://i.pinimg.com/564x/00/38/c8/0038c8d71f9c06e05704d6ff15bde5ac.jpg",
+        "description":"This is a korean manhawa",
+        "price":20
+    },
+    {
+        "id":16,
+        "name":"Hunter x Hunter",
+        "image":"https://i.pinimg.com/736x/dc/69/53/dc69536751eb02803439c94db469a573.jpg",
+        "description":"This is a korean manhawa",
+        "price":25
+    },
+    {
+        "id":17,
+        "name":"Demon Slayer",
+        "image":"https://i.pinimg.com/564x/f1/20/b7/f120b7c3224299a87ec1057b3c4929d4.jpg",
+        "description":"This is a korean manhawa",
+        "price":20
+    },
+    {
+        "id":18,
+        "name":"Fairy Tail",
+        "image":"https://i.pinimg.com/564x/1a/01/0d/1a010d61a1d031124b3bfca47cb94ff2.jpg",
+        "description":"This is a korean manhawa",
+        "price":20
+    },
+    {
+        "id":19,
+        "name":"Code Geass",
+        "image":"https://i.pinimg.com/564x/92/20/88/922088e841d5d6c1bc9525bfdb7fe85e.jpg",
+        "description":"Death Note: A high school student gains a deadly notebook that grants the power to kill anyone whose name is written in it, sparking a thrilling battle of wits between him and a genius detective.",
+        "price":20
+    },
+    {
+        "id":20,
+        "name":"Tokyo Ghoul",
+        "image":"https://i.pinimg.com/originals/e8/f7/51/e8f751b501800087612b1dbb197b8685.gif",
+        "description":"This is a korean manhawa",
+        "price":30
+    },
+    {
+        "id":21,
+        "name":"Gurren Lagann",
+        "image":"https://i.pinimg.com/564x/7e/14/03/7e14039104be7ab51da00f13d9b0fb54.jpg",
+        "description":"Solo Leveling is a South Korean web novel turned manhwa, following the journey of a weak hunter who becomes immensely powerful after awakening a unique ability.",
+        "price":20
+    },
+    {
+        "id":22,
+        "name":"Black Clover",
+        "image":"https://i.pinimg.com/564x/91/07/dd/9107dd31cca9f7185112bee3e625a0a5.jpg",
+        "description":"One Piece follows Monkey D. Luffy and his crew's quest for the ultimate treasure in a fantastical world of pirates and adventure.",
+        "price":30
+    },
+    {
+        "id":23,
+        "name":"Haikyuu!!",
+        "image":"https://i.pinimg.com/564x/5b/45/3b/5b453be59e7dad092ecb23c15c97ae0c.jpg",
+        "description":"Naruto: A young ninja's quest for strength, friendship, and leadership in a world of shinobi.",
+        "price":30
+    },
+    {
+        "id":24,
+        "name":"Re:Zero",
+        "image":"https://i.pinimg.com/564x/0d/a4/00/0da400204a3b90849253b1c28a01e6af.jpg",
+        "description":"This is a korean manhawa",
+        "price":20
+    },
+    {
+        "id":25,
+        "name":"Tokyo Revengers",
+        "image":"https://i.pinimg.com/736x/8f/5a/53/8f5a536c15d0bcf65772327e7195c75b.jpg",
+        "description":"This is a korean manhawa",
+        "price":20
+    },
+    {
+        "id":26,
+        "name":"Violet Evergarden",
+        "image":"https://i.pinimg.com/564x/7a/f4/d9/7af4d9885e560cdf069d1d667e6d2a15.jpg",
+        "description":"This is a korean manhawa",
+        "price":25
     }
 ]

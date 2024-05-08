@@ -5,3 +5,13 @@
     width: 20rem;
     margin-bottom: 30rem;
 }
+
+.article{
+    // transform: translate(20%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.article button {
+    display: none;
+  }

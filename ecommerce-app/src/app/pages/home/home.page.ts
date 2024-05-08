@@ -8,8 +8,7 @@ import { MangaService } from '../../../services/manga.service';
 })
 export class HomePage implements OnInit {
   mangaList: any[] = [];
-
-
+  
   constructor(private mangaService: MangaService) { }
 
   ngOnInit(): void {
@@ -20,5 +19,10 @@ export class HomePage implements OnInit {
     this.mangaService.getMangaData().subscribe(data => {
       this.mangaList = data;
     });
+  }
+
+  addToCart(article: any) {
+    this.mangaService.addToCart(article);
+    console.log('Item added to cart:', article);
   }
 }

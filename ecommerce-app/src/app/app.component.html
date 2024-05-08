@@ -1,9 +1,9 @@
 <ion-app>
   <div >
-    <app-header *ngIf="client === 'connected'"></app-header>
+    <app-header ></app-header>
   </div>
   <ion-router-outlet></ion-router-outlet>
-  <div *ngIf="client === 'connected'">
+  <div>
     <app-footer></app-footer>
   </div>
 </ion-app>

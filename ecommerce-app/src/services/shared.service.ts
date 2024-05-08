@@ -9,9 +9,9 @@ import { Observable, forkJoin, from, observable, throwError } from 'rxjs';
 })
 export class SharedService {
 
-  private apiUrl = 'http://127.0.0.1:8000/';
-  private tokenKey = 'token';
-
+  private apiUrl = 'http://192.168.56.1/';
+  public tokenKey = 'token';
+   accessToken = JSON.stringify(this.tokenKey);
   constructor(
     private http: HttpClient,
     private storage: Storage
@@ -30,12 +30,12 @@ export class SharedService {
   }
 
   signUp(userData: any): Observable<any> {
-    return this.http.post('http://127.0.0.1:8000/accounts/signup', userData);
+    return this.http.post('http://10.20.3.103:8000/accounts/signup', userData);
   }
 
   login(email: string, password: string): Observable<any> {
     const body = { email, password };
-    return this.http.post<any>('http://127.0.0.1:8000/accounts/login', body).pipe(
+    return this.http.post<any>('http://10.20.3.103:8000/accounts/login', body).pipe(
       tap((res: any) => {
         if (res.token) {
           this.storage.set(this.tokenKey, res.token).catch(error => console.error('Error storing token:', error));
@@ -81,8 +81,8 @@ export class SharedService {
     return new Observable(observer => {
       this.storage.get('token').then(token => {
         if (token) {
-          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-          this.http.get('http://127.0.0.1:8000/accounts/getprofile', { headers }).subscribe(
+          const headers = new HttpHeaders().set('Authorization',`Bearer ${'accessToken'}`);
+          this.http.get('http://10.20.3.103:8000/accounts/getprofile', { headers }).subscribe(
             (response) => {
               observer.next(response); // Emit the response
               observer.complete(); // Complete the observable

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -8,6 +8,7 @@ import { CartPageRoutingModule } from './cart-routing.module';
 
 import { CartPage } from './cart.page';
 import { ArticlesModule } from 'src/app/articles/articles.module';
+import { CartItemComponent } from 'src/app/cart-item/cart-item.component';
 
 
 
@@ -21,6 +22,8 @@ import { ArticlesModule } from 'src/app/articles/articles.module';
     
   
   ],
-  declarations: [CartPage]
+  
+  declarations: [CartPage, CartItemComponent],
+  schemas:[NO_ERRORS_SCHEMA]
 })
 export class CartPageModule {}

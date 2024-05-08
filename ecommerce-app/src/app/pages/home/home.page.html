@@ -8,8 +8,12 @@
     </div>
     <div class="row">
       <div class="col py-1" *ngFor="let manga of mangaList">
-        <app-article [manga]="manga"></app-article>
+        <app-article [article]="manga" [isCartPage]="false" (addToCart)="addToCart($event)"></app-article>
       </div>
+      
     </div>
   </div>
 </div>
+<br>
+<br><br>
+<br>

@@ -1,19 +1,11 @@
-<div style="height: 100vh ;overflow-y: auto;">
-  <h1 class="display-3 text-center text-dark py-5" style="font-family:'Qasengi Trial', sans-serif;">Welcome Back </h1>
-  <div class="container-fluid custom-card "  >
-    <h1 class="display-3 text-center text-dark py-2" style="font-family:'Qasengi Trial', sans-serif;">Cart Items </h1>
+<div style="height: 100vh; overflow-y: auto;">
+  <h1 class="display-3 text-center text-dark py-5" style="font-family: 'Qasengi Trial', sans-serif;">Welcome Back</h1>
+  <div class="container-fluid custom-card">
+    <h1 class="display-3 text-center text-dark py-2" style="font-family: 'Qasengi Trial', sans-serif;">Cart Items</h1>
     <div class="row">
-      <div class="col md-1 py-2">
-        <app-article></app-article>
-      </div>
-      <div class="col md-1 py-2">
-        <app-article></app-article>
-      </div>
-      <div class="col md-1 py-2">
-        <app-article></app-article>
+      <div class="col-md-6" *ngFor="let article of cartItems; let i = index">
+        <app-article [article]="article" [isCartPage]="true"></app-article>
       </div>
     </div>
-    <ion-button fill="outline" class="py-3" style="padding-left: 70px;">Buy Now<ion-icon name="add-circle-outline" class="px-2"></ion-icon></ion-button>
-
   </div>
 </div>

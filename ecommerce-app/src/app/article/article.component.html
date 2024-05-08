@@ -1,8 +1,17 @@
-<ion-card class="card text-white h-92 w-70 custom">
-  <img [src]="manga.image" alt="Manga Image">
+<ion-card class="card text-white h-92 w-70 custom d-flex flex-column">
+  <img [src]="article.image" alt="Manga Image">
   <ion-card-header>
-    <ion-card-title class="text-dark" style="font-size: 15px;">{{ manga.name }}</ion-card-title>
+    <ion-card-title class="text-dark" style="font-size: 15px;">{{ article.name }}</ion-card-title>
   </ion-card-header>
-  <ion-card-subtitle class="text-dark text-center" style="font-size: 12px;">Price: {{ manga.price }} dt</ion-card-subtitle>
-  <button type="button" class="btn btn-dark w-100 text-center">Add to cart</button>
+  <ion-card-subtitle class="text-dark text-center" style="font-size: 12px;">Price: {{ article.price }} dt</ion-card-subtitle>
+  <button type="button" class="btn btn-dark w-100 text-center" (click)="addToCart(article)" *ngIf="!isCartPage" >Add to cart</button>
+  <div class="article-container">
+    <button type="button" class="image-button" (click)="buyItem(article.cartItemId)" *ngIf="isCartPage">
+      <img src="../../assets/icon/buy.png" alt="Buy Item" class="button-image">
+    </button>
+    <!-- Delete Item Button -->
+    <button type="button" class="image-button" (click)="deleteItem(article.cartItemId)" *ngIf="isCartPage">
+      <img src="../../assets/icon/delete.png" alt="Delete Item" class="button-image">
+    </button>
+  </div>
 </ion-card>

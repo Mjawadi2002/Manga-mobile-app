@@ -1,0 +1,40 @@
+
+The AbstractBaseUser and BaseUserManager classes are part of Django's authentication framework and are used to create custom user models. Here's an explanation of each:
+
+AbstractBaseUser:
+
+AbstractBaseUser is a class provided by Django that represents the minimal requirements for a user model.
+It provides the core implementation of a user model, but it's an abstract class, meaning it doesn't provide a concrete implementation for all fields and methods required for a user model.
+When creating a custom user model, you typically subclass AbstractBaseUser to provide your own implementation of the user model.
+By subclassing AbstractBaseUser, you have the flexibility to define your own fields and methods, allowing you to customize the user model according to your application's requirements.
+BaseUserManager:
+
+BaseUserManager is a class provided by Django that provides the methods for creating and managing user objects.
+It's used in conjunction with a custom user model (derived from AbstractBaseUser) to handle the creation of user instances and perform tasks such as creating superusers, normal users, etc.
+BaseUserManager provides two main methods: create_user() and create_superuser(). These methods allow you to create standard users and superusers, respectively.
+When creating a custom user model, you typically define a custom manager by subclassing BaseUserManager to provide your own implementation of user creation and management methods.
+By subclassing BaseUserManager, you can customize the behavior of user creation and management to suit the needs of your application.
+In summary, AbstractBaseUser provides the core structure of a user model, while BaseUserManager provides the methods for creating and managing user instances. Together, they form the foundation for creating custom user models in Django.
+///////////////////////////////////////////
+this is another version of the login signup code 
+here @login_required is so important because it checks if the user is logged in before sending him to the home page
+@login_required 
+def home(request):
+    return render(request, "home.html",{})
+
+def authView(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+        else:    
+            form = UserCreationForm()
+    return render(request , "registration/signup.html", {"form":form})
+
+/////////////////////////////////////////////
+for the database connection with mongoDB u need to do this command pip install pymongo (cause django only works by default with mysql , maria , postgres etc and not mongodb)
+then create a database nammed ecommerceapp and everything will be okay
+
+
+to work with tokens we need to install python jwt 
+run this command : pip install PyJWT

@@ -5,8 +5,13 @@ const config: CapacitorConfig = {
   appName: 'ecommerce-app',
   webDir: 'www',
   server: {
-    androidScheme: 'https'
+    androidScheme: 'http',
+    cleartext : true 
+  },
+  android:{
+    allowMixedContent:true
   }
 };
+
 
 export default config;

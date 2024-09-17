@@ -1,13 +1,13 @@
 <ion-footer class="footer">
   <nav class="navbar bg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <ion-icon name="home-sharp"></ion-icon>      </a>
+      <a class="navbar-brand" href="#"><img src="../../assets/images/icons8-shop-50.png" width="33px"></a>
       <a class="navbar-brand" routerLink="/profile">
-        <ion-icon name="person-circle-sharp"></ion-icon>
+        <img src="../../assets/images/icons8-test-account-32.png" width="33px">
       </a>
-      <a class="navbar-brand" routerLink="/login">
-        <ion-icon name="log-out-sharp"></ion-icon>      </a>
+      <a class="navbar-brand" (click)="logout()">
+        <img src="../../assets/images/icons8-logout-32.png" width="33px">  
+      </a>
     </div>
   </nav>
 </ion-footer>
